@@ -1,11 +1,11 @@
 import { t } from './i18n';
 
-export const SITE_RULE_SET_BASE_URL = 'https://gh.sageer.me/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/';
-export const IP_RULE_SET_BASE_URL = 'https://gh.sageer.me/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/';
-export const CLASH_SITE_RULE_SET_BASE_URL = 'https://gh.sageer.me/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/';
-export const CLASH_IP_RULE_SET_BASE_URL = 'https://gh.sageer.me/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/';
-export const SURGE_SITE_RULE_SET_BASEURL = 'https://gh.sageer.me/https://github.com/NSZA156/surge-geox-rules/raw/refs/heads/release/geo/geosite/'
-export const SURGE_IP_RULE_SET_BASEURL = 'https://gh.sageer.me/https://github.com/NSZA156/surge-geox-rules/raw/refs/heads/release/geo/geoip/'
+export const SITE_RULE_SET_BASE_URL = 'https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geosite/';
+export const IP_RULE_SET_BASE_URL = 'https://gh-proxy.com/https://raw.githubusercontent.com/lyc8503/sing-box-rules/refs/heads/rule-set-geoip/';
+export const CLASH_SITE_RULE_SET_BASE_URL = 'https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/';
+export const CLASH_IP_RULE_SET_BASE_URL = 'https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/';
+export const SURGE_SITE_RULE_SET_BASEURL = 'https://gh-proxy.com/https://github.com/NSZA156/surge-geox-rules/raw/refs/heads/release/geo/geosite/'
+export const SURGE_IP_RULE_SET_BASEURL = 'https://gh-proxy.com/https://github.com/NSZA156/surge-geox-rules/raw/refs/heads/release/geo/geoip/'
 // Custom rules
 export const CUSTOM_RULES = [];
 // Unified rule structure
@@ -464,12 +464,11 @@ export const SING_BOX_CONFIG = {
 	},
 	inbounds: [
 		{ type: 'mixed', tag: 'mixed-in', listen: '0.0.0.0', listen_port: 2080 },
-		{ type: 'tun', tag: 'tun-in', address: '172.19.0.1/30', auto_route: true, strict_route: true, stack: 'mixed', sniff: true },
-		{ "type": "socks", "listen": "127.0.0.1", "listen_port": 2081, "tag": "REJECT-in" },
+		{ type: 'tun', tag: 'tun-in', address: '172.19.0.1/30', auto_route: true, strict_route: true, stack: 'mixed', sniff: true }
 	],
 	outbounds: [
-		{ "type": "socks", "server": "127.0.0.1", "server_port": 2081, "tag": "REJECT" },
-		{ "type": "direct", "tag": "DIRECT" },
+		{ type: 'block', tag: 'REJECT' },
+		{ type: "direct", tag: 'DIRECT' }
 	],
 	route : {
 		"rule_set": [
@@ -480,16 +479,7 @@ export const SING_BOX_CONFIG = {
                 "path": "geosite-geolocation-!cn.srs"
             }
 		],
-		rules: [      
-			// {
-			// 	"inbound": ["REJECT-in"],
-			// 	"action": "reject"
-			// },
-			{
-				"inbound": ["DIRECT-in"],
-				"action": "direct"
-			}
-		]
+		rules: []
 	},
 	experimental: {
 		cache_file: {
